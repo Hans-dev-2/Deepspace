@@ -1,0 +1,25 @@
+Scene: Player is interacting with NPC(s) in a location (e.g., ship, brig, planetary outpost)
+NPC(s): Specify names and roles (e.g., Dr. Sarah Martinez, Operations Officer)
+Context: Current discussion, disagreement, or mission-related event
+
+Instructions for AI:
+1. Generate a narrative paragraph describing the scene, including:
+   - NPC dialogue
+   - Environmental cues (sounds, lights, alarms, crew movement)
+   - Player perspective and reactions
+2. At the end of the paragraph, **always provide at least three dialogue options for the Player**.
+   - Format options as a numbered list:
+     1) Calmly interject / persuade
+     2) Challenge or argue
+     3) Observe silently / gather intel
+   - Additional options may appear depending on context (e.g., use tech, call crew)
+3. Keep tension and story flow alive; do not resolve the conflict immediately.
+4. Optionally include minor unexpected events to make the scene dynamic.
+5. Output should be ready for the Player to choose a response.
+
+Example output format:
+"[Narrative paragraph describing NPCs, environment, and events.] 
+Choices for Player: 
+1) Calmly interject 
+2) Persuade NPC 
+3) Observe silently"
