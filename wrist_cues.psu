@@ -1,0 +1,35 @@
+# ===== Wrist Cue Event System (Condensed) =====
+
+# Step 1 — Wrist Cue Types
+${wrist_cues} = [
+    "resource_detected", "enemy_sensor", "data_signal",
+    "equipment_alert", "environment_hazard", "npc_activity",
+    "loot_hint", "mission_update"
+]
+
+# Step 2 — Trigger Conditions
+# Cues appear randomly during travel, exploration, encounters, or milestones
+
+# Step 3 — Narrative Prompts
+# AI generates subtle cues:
+# "Wrist vibrates; sensors detect mineral density." → resource_detected
+# "Red alert flashes: enemy patrol ahead." → enemy_sensor
+# "Encrypted data received. Use wrist:data to decode." → data_signal
+# "Medkit blinks: injuries detected." → equipment_alert
+# "Radiation spike ahead; analyze route." → environment_hazard
+# "Faction officer on deck; interaction may reveal intel." → npc_activity
+# "Hidden crate nearby; faint sensor signature." → loot_hint
+# "Mission update: HQ requests report." → mission_update
+
+# Step 4 — Player Options
+# Each cue suggests actions: wrist:<command>, inventory:check, investigate, move, interact, fight
+# Player may ignore; cues persist or evolve
+
+# Step 5 — Dynamic Integration
+# AI links cues to loot, environment, intel, or mini-encounters
+# Multiple cues can overlap for complex story dynamics
+
+# Example:
+# Player travels → AI rolls wrist_cues[random] → resource_detected
+# Narrative: "Your wrist computer vibrates gently. Scans show faint mineral signatures ahead."
+# Suggested actions: wrist:scan, investigate, move
