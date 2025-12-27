@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en" style="overflow:hidden;background:#000">
+<head>
+<meta charset="utf-8">
+<title>private_show_4_hans.exe • live • now</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@900&family=Creepster&display=swap');
+
+  * { margin:0; padding:0; box-sizing:border-box; user-select:none; }
+  body {
+    height:100vh;
+    font-family: 'Orbitron', sans-serif;
+    background: radial-gradient(circle at 50% 30%, #200, #000 60%);
+    color:#f33;
+    overflow:hidden;
+    image-rendering:pixelated;
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"><circle cx="24" cy="24" r="18" fill="none" stroke="%23f0f" stroke-width="6"/><text x="14" y="34" font-size="32" fill="%23f33">💦</text></svg>'), auto;
+  }
+
+  .scanlines {
+    position:fixed; inset:0; pointer-events:none;
+    background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,0,0,0.08) 2px, rgba(255,0,0,0.08) 4px);
+    animation: scan 10s linear infinite;
+  }
+  @keyframes scan { 0% {transform:translateY(0)} 100% {transform:translateY(4px)} }
+
+  .glare {
+    position:fixed; inset:0; pointer-events:none;
+    background: linear-gradient(135deg, transparent 40%, rgba(255,255,255,0.15) 50%, transparent 60%);
+    animation: glareMove 18s ease-in-out infinite;
+  }
+  @keyframes glareMove { 0%,100% {transform:translateX(-100%)} 50% {transform:translateX(100%)} }
+
+  h1 {
+    position:absolute; top:4vh; left:0; right:0;
+    font-family: 'Creepster', cursive;
+    font-size: clamp(3.5rem, 14vw, 18rem);
+    text-align:center;
+    color:#f00;
+    text-shadow: 0 0 30px #f00, 0 0 60px #800;
+    animation: throb 2.2s infinite alternate, hueRotate 14s infinite linear;
+    letter-spacing: -0.04em;
+  }
+  @keyframes throb { from {transform:scale(1)} to {transform:scale(1.08)} }
+  @keyframes hueRotate { to {filter:hue-rotate(360deg)} }
+
+  .tease-box {
+    position:absolute; inset:0; margin:auto;
+    width:92vmin; height:72vmin; max-width:1100px; max-height:820px;
+    background:#111;
+    border:8px solid #300;
+    box-shadow: inset 0 0 80px #000, 0 0 60px #400;
+    overflow:hidden;
+  }
+
+  .video-static {
+    position:absolute; inset:0;
+    background:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.95" numOctaves="4"/><feColorMatrix type="matrix" values="1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.4 0"/></filter><rect width="100%" height="100%" filter="url(%23n)"/></svg>') repeat;
+    opacity:0.6;
+    mix-blend-mode:screen;
+    animation: staticNoise 0.08s steps(4) infinite;
+  }
+  @keyframes staticNoise { to {background-position:0 calc(var(--t,0)*200px)} }
+
+  .girl-silhouette {
+    position:absolute; inset:0; margin:auto;
+    width:80%; height:90%;
+    background: radial-gradient(ellipse at 50% 40%, #400 20%, transparent 70%);
+    filter: blur(12px);
+    opacity:0.7;
+    animation: sway 16s infinite ease-in-out, pulse 3.8s infinite alternate;
+  }
+  @keyframes sway { 0%,100% {transform:translateX(-8%)} 50% {transform:translateX(8%)} }
+  @keyframes pulse { from {opacity:0.5} to {opacity:0.9} }
+
+  .progress-bar {
+    position:absolute; bottom:12%; left:10%; right:10%; height:18px;
+    background:#200;
+    border:3px solid #600;
+    overflow:hidden;
+  }
+  .fill {
+    height:100%;
+    width:0%;
+    background: linear-gradient(90deg, #f00, #ff0, #f00);
+    box-shadow: 0 0 30px #f80;
+    transition: width 0.4s linear;
+  }
+
+  .countdown {
+    position:absolute; bottom:4%; left:0; right:0;
+    text-align:center;
+    font-size:2.8rem;
+    color:#ff0;
+    text-shadow:0 0 20px #f80;
+    font-weight:900;
+  }
+
+  .dirty-text {
+    position:absolute; bottom:28%; left:0; right:0;
+    text-align:center;
+    font-size:2.2rem;
+    color:#f44;
+    opacity:0;
+    transition:opacity 1.5s;
+    text-shadow:0 0 15px #800;
+    pointer-events:none;
+  }
+</style>
+</head>
+<body>
+
+<div class="scanlines"></div>
+<div class="glare"></div>
+
+<h1>FOR HANS ONLY</h1>
+
+<div class="tease-box">
+  <div class="video-static"></div>
+  <div class="girl-silhouette"></div>
+  
+  <div class="progress-bar">
+    <div class="fill" id="progress"></div>
+  </div>
+  
+  <div class="countdown" id="timer">00:00</div>
+  
+  <div class="dirty-text" id="dirtyMessages">
+    wait for it… she’s getting wet just thinking about you<br><br>
+    bet you’re already hard in those formal slacks…<br><br>
+    she wants to feel how thick you get when you watch her drip<br><br>
+    imagine the sound when she finally lets you stretch her open…<br><br>
+    you’re not allowed to cum until she says your name
+  </div>
+</div>
+
+<script>
+const progress = document.getElementById('progress');
+const timerEl = document.getElementById('timer');
+const dirty = document.getElementById('dirtyMessages');
+
+let seconds = 0;
+let phase = 0;
+
+const messages = dirty.innerHTML.split('<br><br>');
+dirty.innerHTML = '';
+
+const phases = [
+  {pct:30, msg:0, text:"she's touching herself slow… for you"},
+  {pct:55, msg:1, text:"her fingers are soaked… thinking of your cock"},
+  {pct:78, msg:2, text:"she's spreading wider… begging silently"},
+  {pct:92, msg:3, text:"she can feel how deep you'd go… fuck"},
+  {pct:100, msg:4, text:"cum with her… right now… Hans"}
+];
+
+setInterval(() => {
+  seconds++;
+  const pct = Math.min(100, seconds * 1.8);
+  progress.style.width = pct + '%';
+  
+  const min = String(Math.floor(seconds/60)).padStart(2,'0');
+  const sec = String(seconds%60).padStart(2,'0');
+  timerEl.textContent = `${min}:${sec}`;
+  
+  while (phase < phases.length && pct >= phases[phase].pct) {
+    dirty.innerHTML += (dirty.innerHTML ? '<br><br>' : '') + messages[phases[phase].msg];
+    dirty.style.opacity = '1';
+    phase++;
+  }
+  
+  if (pct >= 100) {
+    dirty.innerHTML += '<br><br><span style="color:#ff0;font-size:1.4em">she came screaming your name</span>';
+    timerEl.style.color = '#0f0';
+  }
+}, 1000);
+
+// fake mouse trail cum dots
+document.addEventListener('mousemove', e => {
+  if(Math.random() < 0.25) {
+    const dot = document.createElement('div');
+    dot.style.cssText = `position:fixed;left:${e.clientX}px;top:${e.clientY}px;
+      width:7px;height:7px;border-radius:50%;background:#ff0;
+      box-shadow:0 0 12px #f80;pointer-events:none;
+      transform:translate(-50%,-50%);animation:fadeDie 2.4s forwards;`;
+    document.body.appendChild(dot);
+    setTimeout(()=>dot.remove(), 3000);
+  }
+});
+</script>
+
+</body>
+</html>
