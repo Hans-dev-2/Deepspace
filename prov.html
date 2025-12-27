@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en" class="provocative-vibe">
+<head>
+<meta charset="UTF-8" />
+<title>come closer if you dare</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<style>
+  :root {
+    --bg: #0a000a;
+    --accent: #ff1a8c;
+    --accent-glow: #ff1a8c88;
+    --text: #f0e8ff;
+    --text-dim: #b19cd9;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html, body {
+    height: 100%;
+    overflow: hidden;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Courier New", "Menlo", monospace;
+    cursor: none;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at 30% 70%, #330022 0%, transparent 60%);
+    pointer-events: none;
+    z-index: -2;
+  }
+
+  .cursor {
+    position: fixed;
+    width: 32px;
+    height: 32px;
+    border: 1px solid var(--accent);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 9999;
+    transition: all 0.13s ease-out;
+    mix-blend-mode: difference;
+  }
+
+  .cursor.grow {
+    width: 80px;
+    height: 80px;
+    background: var(--accent-glow);
+    border-color: transparent;
+  }
+
+  main {
+    height: 100vh;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    position: relative;
+  }
+
+  h1 {
+    font-size: clamp(3.8rem, 12vw, 18rem);
+    font-weight: 900;
+    letter-spacing: -0.08em;
+    line-height: 0.82;
+    text-transform: uppercase;
+    background: linear-gradient(90deg, #ff1a8c, #c71585, #ff4da6, #ff1a8c);
+    background-size: 400% 400%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientFlow 12s ease infinite;
+    user-select: none;
+  }
+
+  .subtitle {
+    margin-top: 1.2rem;
+    font-size: 1.4rem;
+    letter-spacing: 0.6em;
+    color: var(--text-dim);
+    opacity: 0.7;
+    transition: all 0.6s ease;
+  }
+
+  .enter-zone {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    font-size: 2.2rem;
+    font-weight: bold;
+    letter-spacing: 0.4em;
+    color: var(--accent);
+    text-shadow: 0 0 30px var(--accent-glow);
+    opacity: 0;
+    transition: opacity 1.4s ease;
+    pointer-events: none;
+  }
+
+  .enter-zone.visible {
+    opacity: 0.9;
+  }
+
+  @keyframes gradientFlow {
+    0%   { background-position: 0% 50% }
+    50%  { background-position: 100% 50% }
+    100% { background-position: 0% 50% }
+  }
+
+  .pulse-text {
+    animation: pulseText 4s infinite alternate;
+  }
+
+  @keyframes pulseText {
+    from { transform: scale(1); }
+    to   { transform: scale(1.04); }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="customCursor"></div>
+
+<main>
+  <h1 id="mainTitle">forbidden</h1>
+  <div class="subtitle">touch if you’re brave enough</div>
+  
+  <div class="enter-zone" id="enterZone">
+    ENTER AT YOUR OWN RISK
+  </div>
+</main>
+
+<script>
+// ──────────────────────────────────────────────────────────────
+// very simple but moody cursor + text interaction
+// ──────────────────────────────────────────────────────────────
+
+const cursor = document.getElementById('customCursor');
+const title = document.getElementById('mainTitle');
+const enterZone = document.getElementById('enterZone');
+const subtitle = document.querySelector('.subtitle');
+
+let mouseX = 0, mouseY = 0;
+let cursorX = 0, cursorY = 0;
+const speed = 0.14;
+
+function animateCursor() {
+  cursorX += (mouseX - cursorX) * speed;
+  cursorY += (mouseY - cursorY) * speed;
+  
+  cursor.style.left = cursorX + 'px';
+  cursor.style.top  = cursorY + 'px';
+  
+  requestAnimationFrame(animateCursor);
+}
+
+document.addEventListener('mousemove', e => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+});
+
+document.addEventListener('mousedown', () => {
+  cursor.classList.add('grow');
+});
+
+document.addEventListener('mouseup', () => {
+  cursor.classList.remove('grow');
+});
+
+// hover title → reveal dangerous text
+title.addEventListener('mouseenter', () => {
+  enterZone.classList.add('visible');
+  subtitle.style.opacity = '0.3';
+  subtitle.style.letterSpacing = '1.2em';
+});
+
+title.addEventListener('mouseleave', () => {
+  enterZone.classList.remove('visible');
+  subtitle.style.opacity = '0.7';
+  subtitle.style.letterSpacing = '0.6em';
+});
+
+animateCursor();
+</script>
+</body>
+</html>
